@@ -1,4 +1,4 @@
-# Minimal Installation & Configuration Guide  
+# Minimal Installation & Configuration Guide
 Argo Rollouts + Envoy Gateway (Gateway API) + Kustomize
 
 This document provides the minimal required installation steps and configuration commands to enable Gateway API–based traffic routing with Argo Rollouts.
