@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: vote
+  namespace: prod
 spec:
   replicas: 5
   strategy:
@@ -10,8 +11,10 @@ spec:
       canaryService: vote-preview
       stableService: vote
       trafficRouting:
-        nginx:
-          stableIngress: vote
+        plugins:
+          argoproj-labs/gatewayAPI:
+            httpRoute: vote-httproute
+            namespace: prod
       steps:
       - setCanaryScale:
           replicas: 3
@@ -28,3 +31,4 @@ spec:
       - pause:
           duration: 10s
       - setWeight: 100
+

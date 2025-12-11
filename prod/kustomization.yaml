@@ -2,8 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - ../base
-- ingress.yaml
-namespace: prod
+- gatewayclass.yaml
+- gateway.yaml
+- httproute.yaml
 commonAnnotations:
   supported-by: sre@example.com
 labels:
@@ -11,7 +12,24 @@ labels:
   pairs:
     project: instavote
 patches:
-- path: service.yaml
-- path: preview-service.yaml
-- path: rollout.yaml
-
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: vote
+    path: service.yaml
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: vote-preview
+    path: preview-service.yaml
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Rollout
+      name: vote
+    path: rollout.yaml
+images:
+- name: schoolofdevops/vote
+  newTag: v4
