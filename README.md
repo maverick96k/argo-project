@@ -8,5 +8,5 @@ Base holds shared resources; overlays (e.g., *staging*) control environment-spec
 - `kubectl` + `kustomize`  
 - Argo Rollouts CRDs & controller:
 ```sh
-kubectl apply -n argo-rollout -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 
